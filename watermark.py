@@ -15,3 +15,12 @@ def watermark_photo(input_image_path, watermark_image_path, output_name, positio
                       mask=watermark.resize((width_new, height_new), Image.ANTIALIAS))
     save_edited_image(transparent.convert('RGB'), output_name)
     add_to_edited_table(output_name)
+
+def find_size(w, h, wWM, hWM):
+    if w > h:
+        heightWM_new = int(h / 2)
+        widthWM_new = int((heightWM_new * wWM) / hWM)
+    else:
+        widthWM_new = int(w / 2)
+        heightWM_new = int((widthWM_new * hWM) / wWM)
+    return widthWM_new, heightWM_new
