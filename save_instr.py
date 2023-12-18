@@ -48,6 +48,29 @@ def save_edited_image(image, image_name):
     save_any_image(image, image_name, "Edited", 2)
 
 
+def save_any_image(image, file_name, path, num):
+    try:
+        if os.path.exists(path) == 0:
+            os.mkdir(path)
+            os.chmod(path, 0o777)
+        directory = os.path.join(os.path.abspath(os.curdir), path)
+        list_of_files = os.listdir(directory)
+        extension = file_name.find('.')
+        counter = 0
+        for i in list_of_files:
+            if i == file_name or i == file_name[:extension] + str(counter) + file_name[extension:]:
+                counter = counter + 1
+        if counter >= 0:
+            file_name = file_name[:extension] + str(counter) + file_name[extension:]
+        path = os.path.join(directory, file_name)
+        if num == 1:
+            cv2.imwrite(path, image)
+        else:
+            image.save(path)
+    except Exception as e:
+        print("Error!", e.__class__, "occurred.")
+    return counter
+
 
 
 
