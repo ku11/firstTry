@@ -14,3 +14,9 @@ def resize_img(img_cv2):
 
     white_img = Image.new('RGB', (white_width, white_height), 'white')
 
+    x = int((white_img.size[0] - width) / 2)
+    y = int((white_img.size[1] - height) / 2)
+
+    white_img.paste(img, (x, y))
+    im_np = np.asarray(white_img)
+    return im_np
