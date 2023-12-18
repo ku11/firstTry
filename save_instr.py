@@ -38,6 +38,12 @@ def add_to_any_table(file_name, table_name):
     except Exception as e:
         print("Error!", e.__class__, "occurred.")
 
+        
+def save_original_image(image, image_name):
+    counter = save_any_image(image, image_name, "Original", 1)
+    print(counter)
+    return counter
+
 
 
 
