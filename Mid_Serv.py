@@ -28,3 +28,6 @@ def get_watermark_image(filepath):
         return "TimeoutError"
     except requests.exceptions.RequestException:
         return "OtherError"
+
+    app = Flask(__name__)
+    app.debug = False
