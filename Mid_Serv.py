@@ -31,3 +31,14 @@ def get_watermark_image(filepath):
 
     app = Flask(__name__)
     app.debug = False
+
+    @app.route('/api/test', methods=['POST'])
+    def test():
+        r = request
+        nparr = np.fromstring(r.data, np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        img_resized = resize_img(img)
+
+        filename = 'tmp.jpg'
+        path = os.curdir + filename
+        cv2.imwrite(path, img_resized)
