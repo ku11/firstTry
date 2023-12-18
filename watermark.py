@@ -2,7 +2,7 @@ from PIL import Image
 from save_instrument import save_edited_image
 from save_instrument import add_to_edited_table
 
-
+def emptyfunc():
 def watermark_photo(input_image_path, watermark_image_path, output_name, position):
     base_image = Image.open(input_image_path)
     watermark = Image.open(watermark_image_path)
