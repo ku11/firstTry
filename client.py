@@ -6,7 +6,7 @@ import cv2
 
 def save_image(image):
     filename = 'Processed image.png'
-    print(f"filename, image: {filename}, {image}")
+    #print(f"filename, image: {filename}, {image}")
     cv2.imwrite(filename, image)
 
 
@@ -26,3 +26,14 @@ def get_watermark_image(imagename):
         nparr = np.fromstring(r.content, np.uint8)
         im = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         return im
+
+    except requests.exceptions.HTTPError:
+        raise Exception("Http Error")
+    except requests.exceptions.ConnectionError:
+        raise Exception("Connecting Error")
+    except requests.exceptions.Timeout:
+        raise Exception("Timeout Error")
+    except requests.exceptions.RequestException:
+        raise Exception("OOps: Something Else")
+
+
