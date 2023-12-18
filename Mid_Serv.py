@@ -42,3 +42,12 @@ def get_watermark_image(filepath):
         filename = 'tmp.jpg'
         path = os.curdir + filename
         cv2.imwrite(path, img_resized)
+
+        result = get_watermark_image(path)
+        if isinstance(result, (int, str)):
+            return Response(status=result)
+        img2 = cv2.imread(path)
+        _, img_encoded = cv2.imencode('.jpg', img2)
+        return Response(img_encoded.tostring())
+
+    app.run(host="0.0.0.0", port=3000)
