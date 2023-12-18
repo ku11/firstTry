@@ -22,3 +22,17 @@ def test():
     add_to_origin_table(filename)
     path_to_original = os.path.abspath(os.curdir) + '\\Original\\' + filename[:extension] + str(counter) + filename[extension:]
     edited_name = 'edited.jpg'
+
+    path_to_watermark = "w.png"
+
+    watermark_photo(path_to_original, path_to_watermark, edited_name, position=(1, 1))
+    extension = edited_name.find('.')
+    edited_name = edited_name[:extension] + str(counter) + edited_name[extension:]
+    path_to_edited = os.path.abspath(os.curdir) + '\\Edited\\' + edited_name
+    img = cv2.imread(path_to_edited)
+    _, img_encoded = cv2.imencode('.jpg', img)
+    return Response(img_encoded.tostring())
+
+
+# run flask server
+app.run(host="0.0.0.0", port=5000)
